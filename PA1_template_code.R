@@ -62,12 +62,34 @@ ActivityDataNAFilled <- as.data.frame(ActivityDataDate)
 ActivityDataAggregate <- aggregate(steps ~ interval, ActivityDataDate, mean)
 ActivityDataNAFilled$steps[is.na(ActivityDataNAFilled$steps)] <- ActivityDataAggregate$steps
 
-totalStepsPerDay1 <- c()
+totalStepsPerDayImputed <- c()
 numDates1 <- length(unique(ActivityDataNAFilled$date))
-for(i in 1:numDates) {
+for(i in 1:numDates1) {
     dates1 <- unique(ActivityDataNAFilled$date)[i]
-    totalStepsPerDay1[i] <- sum(ActivityDataNAFilled$steps[ActivityDataNAFilled$date == dates1])
+    totalStepsPerDayImputed[i] <- sum(ActivityDataNAFilled$steps[ActivityDataNAFilled$date == dates1])
 }
 
-hist(totalStepsPerDay1, xlab = "Total Steps Per Day", main = "(Imputed) Total Steps Per Day")
+hist(totalStepsPerDayImputed, xlab = "Total Steps Per Day", main = "(Imputed) Total Steps Per Day")
+
+#Mean and median of the total
+mean(totalStepsPerDayImputed)
+median(totalStepsPerDayImputed)
+
+
+
+#Are there differences in activity patterns between weekdays and weekends?
+ActivityDataNAFilledDay <- as.data.frame(ActivityDataNAFilled)
+ActivityDataNAFilledDay$day <- weekdays(ActivityDataNAFilled$date)
+ActivityDataNAFilledDay$weekday <- weekdays(ActivityDataNAFilled$date)
+numDates2 <- length(ActivityDataNAFilledDay$date)
+for(i in 1:numDates2) {
+    if (ActivityDataNAFilledDay$day[i] == "Saturday" || ActivityDataNAFilledDay$day[i] == "Sunday") {
+        ActivityDataNAFilledDay$weekday[i] <- "Weekend"
+    }
+    else {
+        ActivityDataNAFilledDay$weekday[i] <- "Weekday"
+    }
+}
+
+
 
