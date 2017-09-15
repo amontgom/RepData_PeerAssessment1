@@ -16,7 +16,7 @@ Retrieve File from Internet + Preprocessing
     dateDowloaded <- date()
     dateDowloaded
 
-    ## [1] "Thu Sep 14 20:14:26 2017"
+    ## [1] "Thu Sep 14 20:23:26 2017"
 
     unzip(temp, "activity.csv") #unzips the file, turns it into a readable .txt file
     ActivityData <- read.csv("activity.csv", header = TRUE)
@@ -186,7 +186,8 @@ Are there differences in activity patterns between weekdays and weekends?
 ### Make the panel plot for weekdays/ends
 
     library(ggplot2)
-    qplot(interval, steps, data=ADNAFDInterval, geom=c("line"), xlab="Interval", ylab="Number of steps", main="") + facet_wrap(~ weekday, ncol=1)
+    qplot(interval, steps, data=ADNAFDInterval, geom=c("line"), xlab="Interval",
+          ylab="Number of steps", main="") + facet_wrap(~ weekday, ncol=1)
 
 ![](PA1_template_files/figure-markdown_strict/unnamed-chunk-18-1.png)
 
@@ -195,4 +196,5 @@ Are there differences in activity patterns between weekdays and weekends?
 Removes now-unnecessary data from memory
 ----------------------------------------
 
-    rm(ActivityData, ActivityDataAggregate, ActivityDataDate, ActivityDataDateClean, ActivityDataNAFilled, ActivityDataNAFilledDay, ADNAFDInterval)
+    rm(ActivityData, ActivityDataAggregate, ActivityDataDate, ActivityDataDateClean,
+       ActivityDataNAFilled, ActivityDataNAFilledDay, ADNAFDInterval)

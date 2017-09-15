@@ -160,12 +160,14 @@ ADNAFDInterval <- aggregate(steps ~ interval+weekday, ActivityDataNAFilledDay, m
 ###Make the panel plot for weekdays/ends
 ```{r}
 library(ggplot2)
-qplot(interval, steps, data=ADNAFDInterval, geom=c("line"), xlab="Interval", ylab="Number of steps", main="") + facet_wrap(~ weekday, ncol=1)
+qplot(interval, steps, data=ADNAFDInterval, geom=c("line"), xlab="Interval",
+      ylab="Number of steps", main="") + facet_wrap(~ weekday, ncol=1)
 ```
 
 ******
 
 ##Removes now-unnecessary data from memory
 ```{r}
-rm(ActivityData, ActivityDataAggregate, ActivityDataDate, ActivityDataDateClean, ActivityDataNAFilled, ActivityDataNAFilledDay, ADNAFDInterval)
+rm(ActivityData, ActivityDataAggregate, ActivityDataDate, ActivityDataDateClean,
+   ActivityDataNAFilled, ActivityDataNAFilledDay, ADNAFDInterval)
 ```
